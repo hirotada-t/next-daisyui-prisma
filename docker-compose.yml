@@ -12,6 +12,7 @@ services:
       - CHOKIDAR_USEPOLLING=true
     ports:
       - "3000:3000"
+      - "5555:5555"
     command: sh -c "npm install && npm run dev"
     stdin_open: true
     tty: true
@@ -23,3 +24,11 @@ services:
     ports:
       - "5000:5000"
     tty: true
+  db:
+    image: postgres:14.2
+    volumes:
+      - ./db:/var/lib/postgresql/data
+    env_file:
+      - ./front/.env
+    ports:
+      - "5432:5432"
